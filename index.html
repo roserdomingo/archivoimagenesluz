@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Modo responsive en móviles-->
+  <title>Archivo de imágenes-luz</title> <!-- Título -->
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet"> <!-- Fuente -->
+</head>
+
+<body> <!-- Contenido de la página -->
+  <div class="container">
+    <aside id="sidebar"> <!-- Barra lateral -->
+      <header>
+        <h1>Archivo de <br>imágenes-luz</h1> <!-- Título y subtítulo -->
+        <div class="autor">Roser Domingo</div>
+      </header>
+      <nav id="month-filter"></nav> <!-- Filtrar las imágenes por meses -->
+      <button id="mobile-month-toggle" aria-label="Abrir menú"> <!-- Botones del menú en móviles -->
+        <span class="icon-hamburger">☰</span>
+        <span class="icon-close">✕</span>
+      </button>
+    </aside>
+    <main id="main-content">
+      <div id="gallery"></div> <!-- Contenedor con la galería de imágenes/vídeos -->
+    </main>
+  </div>
+  <div id="lightbox" class="hidden"> <!-- Para ver los archivos a pantalla completa -->
+    <button id="prev" class="arrow">&#8592;</button>
+    <div id="lightbox-content"></div>
+    <button id="next" class="arrow">&#8594;</button>
+    <!-- Para navegar entre las imágenes/vídeos. Flechas izquierda y derecha -->
+    <span id="close">&times;</span> <!-- Para cerrar los archivos a pantalla completa -->
+  </div>
+  <script src="media.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
