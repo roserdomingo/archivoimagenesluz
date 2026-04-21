@@ -228,7 +228,7 @@ iframe.media-thumb {
 #mobile-month-toggle.hidden {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.15s ease;
+  /* transition: opacity 0.15s ease; */
 }
 
 
@@ -315,15 +315,27 @@ iframe.media-thumb {
   #month-filter {
     position: fixed;
     inset: 0;
-    height: 100vh;
+    width: 100vw;
+    height: 100dvh;
     background: #fff;
-    padding: 5rem 1.5rem 1.5rem;
     z-index: 2000;
     display: none;
     flex-direction: column;
     gap: 0.6rem;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 5rem 1.5rem 1rem;
+    box-sizing: border-box;
   }
+
+  /*Espacio al final del scroll del menú */
+  #month-filter::after {
+    content: "";
+    display: block;
+    height: 4.5rem;
+    flex-shrink: 0;
+  }
+
 
   #month-filter.open {
     display: flex;
@@ -337,6 +349,12 @@ iframe.media-thumb {
     padding: 0.4rem 0;
     font-size: 1rem;
   }
+
+
+  #month-filter button:last-child {
+    margin-bottom: 1rem;
+  }
+
 }
 
 /* Modo móvil: el menú lateral se oculta y sale el desplegable con la hamburguesa, la galería saca una miniatura cada línea */
