@@ -271,7 +271,7 @@ monthFilter.addEventListener('click', (e) => {
 const mobileToggle = document.getElementById('mobile-month-toggle');
 
 
-const HAMBURGER_SHOW_THRESHOLD = 80; //Ajustar el rango
+const HAMBURGER_SHOW_THRESHOLD = 20; //Ajustar el rango
 
 function controlHamburgerVisibility() {
   if (window.scrollY <= HAMBURGER_SHOW_THRESHOLD) {
