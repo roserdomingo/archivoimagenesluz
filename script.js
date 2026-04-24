@@ -270,14 +270,17 @@ monthFilter.addEventListener('click', (e) => {
 
 const mobileToggle = document.getElementById('mobile-month-toggle');
 
-//Visibilidad de la hamburguesa según scroll
+
+const HAMBURGER_SHOW_THRESHOLD = 140; // ajustable
+
 function controlHamburgerVisibility() {
-  if (window.scrollY === 0) {
+  if (window.scrollY <= HAMBURGER_SHOW_THRESHOLD) {
     mobileToggle.classList.remove('hidden');
   } else {
     mobileToggle.classList.add('hidden');
   }
 }
+
 
 //Al cargar la página
 controlHamburgerVisibility();
