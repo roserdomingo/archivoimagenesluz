@@ -143,21 +143,12 @@ function openLightbox(idx) { //Abrir el lightbox (visor a pantalla completa)
 
   //Renderizado según el tipo de elemento (imagen o vídeo)
   if (item.type === 'image') {
-    const img = new Image();
-    img.decoding = "async";
+    const img = document.createElement('img');
     img.src = item.file;
     img.alt = item.title || '';
-
-    img.decode().then(() => {
-      content.appendChild(img);
-      lightbox.classList.remove('hidden');
-    }).catch(() => {
-      //Fallback por si decode falla
-      content.appendChild(img);
-      lightbox.classList.remove('hidden');
-    });
-    return;
+    content.appendChild(img);
   }
+
   else if (item.iframe) {
     const iframe = document.createElement('iframe');
     iframe.src = item.src;
