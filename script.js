@@ -42,6 +42,13 @@ function renderMonthFilter() {
   });
 }
 
+//Para precargar las imágenes grandes
+function preloadImage(src) {
+  const img = new Image();
+  img.src = src;
+}
+
+
 function renderGallery() {
   const gallery = document.getElementById('gallery');
   gallery.innerHTML = '';
@@ -60,7 +67,16 @@ function renderGallery() {
   items.forEach((item, idx) => {
     const div = document.createElement('div');
     div.className = 'media-item';
-    div.onclick = () => openLightbox(idx); //Abre el lightbox (visor a pantalla completa)
+
+
+    div.onclick = () => { //Abre el visor a pantalla completa
+      if (item.type === 'image') { //Precarga las imágenes
+        preloadImage(item.file);
+      }
+      openLightbox(idx);
+    };
+
+
 
     let mediaElement;
 
@@ -135,7 +151,7 @@ function openLightbox(idx) { //Abrir el lightbox (visor a pantalla completa)
     mobileMonthToggle.style.display = 'none';
   }
 
-  //Renderizado se´gun el tipo de elemento (imagen o vídeo)
+  //Renderizado según el tipo de elemento (imagen o vídeo)
   if (item.type === 'image') {
     const img = document.createElement('img');
     img.src = item.file;
