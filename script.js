@@ -42,13 +42,6 @@ function renderMonthFilter() {
   });
 }
 
-//Para precargar las imágenes grandes
-function preloadImage(src) {
-  const img = new Image();
-  img.src = src;
-}
-
-
 function renderGallery() {
   const gallery = document.getElementById('gallery');
   gallery.innerHTML = '';
@@ -70,9 +63,6 @@ function renderGallery() {
 
 
     div.onclick = () => { //Abre el visor a pantalla completa
-      if (item.type === 'image') { //Precarga las imágenes
-        preloadImage(item.file);
-      }
       openLightbox(idx);
     };
 
@@ -153,12 +143,22 @@ function openLightbox(idx) { //Abrir el lightbox (visor a pantalla completa)
 
   //Renderizado según el tipo de elemento (imagen o vídeo)
   if (item.type === 'image') {
-    const img = document.createElement('img');
+    const img = new Image();
+    img.decoding = "async";
     img.src = item.file;
-
     img.alt = item.title || '';
-    content.appendChild(img);
-  } else if (item.iframe) {
+
+    img.decode().then(() => {
+      content.appendChild(img);
+      lightbox.classList.remove('hidden');
+    }).catch(() => {
+      //Fallback por si decode falla
+      content.appendChild(img);
+      lightbox.classList.remove('hidden');
+    });
+    return;
+  }
+  else if (item.iframe) {
     const iframe = document.createElement('iframe');
     iframe.src = item.src;
     iframe.width = "90%";
