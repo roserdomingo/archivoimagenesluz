@@ -287,3 +287,21 @@ controlHamburgerVisibility();
 
 //Al hacer scroll
 window.addEventListener('scroll', controlHamburgerVisibility);
+
+//Umbral para mostrar u ocultar la X dentro del menú
+const MENU_TOGGLE_SHOW_THRESHOLD = 20;
+
+//Controlar visibilidad de la X según scroll dentro del menú
+function controlToggleInsideMenu() {
+  //Solo ocurre si el menú está abierto
+  if (!monthFilter.classList.contains('open')) return;
+
+  if (monthFilter.scrollTop <= MENU_TOGGLE_SHOW_THRESHOLD) {
+    mobileToggle.classList.remove('hidden');
+  } else {
+    mobileToggle.classList.add('hidden');
+  }
+}
+
+//Scroll del menú
+monthFilter.addEventListener('scroll', controlToggleInsideMenu);
