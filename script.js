@@ -66,11 +66,19 @@ function renderGallery() {
 
     if (item.type === 'image') { //Características de las imágenes
       mediaElement = document.createElement('img');
-      mediaElement.src = item.file;
+
+      const thumbPath = item.file.replace(/^media\//, 'media/thumbs/');
+
+      mediaElement.src = thumbPath; //Usar miniatura
+      mediaElement.onerror = () => {
+        mediaElement.src = item.file; //Fallback por si falta alguna
+      };
+
       mediaElement.alt = item.title || '';
       mediaElement.className = 'media-thumb';
-
-    } else if (item.iframe) { //Características de los vídeos de YouTube (iframe)
+      mediaElement.loading = "lazy";
+    }
+    else if (item.iframe) { //Características de los vídeos de YouTube (iframe)
 
       // Si hay miniatura, mostrar imagen
       if (item.thumbnail) {
@@ -78,6 +86,7 @@ function renderGallery() {
         mediaElement.src = item.thumbnail;
         mediaElement.className = 'media-thumb';
         mediaElement.alt = "thumbnail";
+        mediaElement.loading = "lazy"
       }
 
       // Si no hay miniatura, mostrar iframe
