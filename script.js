@@ -3,6 +3,8 @@ if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
 
+const prefetchedImages = new Set();
+
 //Variables globales
 let currentMonth = null;
 let currentIndex = 0;
@@ -61,12 +63,30 @@ function renderGallery() {
     const div = document.createElement('div');
     div.className = 'media-item';
 
+    //Prefetch en escritorio (hover)
+    div.addEventListener('mouseenter', () => {
+      if (item.type !== 'image') return;
+      if (prefetchedImages.has(item.file)) return;
 
-    div.onclick = () => { //Abre el visor a pantalla completa
+      const img = new Image();
+      img.src = item.file;
+      prefetchedImages.add(item.file);
+    });
+
+    //Prefetch en móvil (primer toque)
+    div.addEventListener('touchstart', () => {
+      if (item.type !== 'image') return;
+      if (prefetchedImages.has(item.file)) return;
+
+      const img = new Image();
+      img.src = item.file;
+      prefetchedImages.add(item.file);
+    }, { passive: true });
+
+    //Click normal (no cambia)
+    div.onclick = () => {
       openLightbox(idx);
     };
-
-
 
     let mediaElement;
 
